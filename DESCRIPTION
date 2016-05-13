@@ -1,0 +1,20 @@
+Package: carpenter
+Type: Package
+Title: Easily Create Tables Of Summary Statistics For Reports
+Version: 0.1.0.9000
+Date: 2016-01-12
+Authors@R: person("Luke", "Johnston", email = "lwjohnst@gmail.com",
+    role = c("aut", "cre"))
+Description: More about what it does (maybe more than one line)
+License: MIT
+LazyData: TRUE
+Imports:
+    dplyr,
+    magrittr,
+    tidyr,
+    pander
+RoxygenNote: 5.0.1
+Suggests: knitr,
+    rmarkdown,
+    pixiedust
+VignetteBuilder: knitr
