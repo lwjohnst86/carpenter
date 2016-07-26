@@ -13,53 +13,63 @@ NULL
 #' @rdname table_stats
 #' @export
 stat_median <- function(x, digits = 1) {
-    round(median(x, na.rm = TRUE), digits) %>%
-        .drop_nan_na()
+    x <- median(x, na.rm = TRUE)
+    x <- round(x, digits)
+    x <- format(x, nsmall = digits)
+    gsub('^NaN \\(NA\\)$', '', x)
 }
 
 #' @rdname table_stats
 #' @export
 stat_iqr <- function(x, digits = 1) {
-    paste0(round(quantile(x, 0.25, na.rm = TRUE), digits),
-           '-', round(quantile(x, 0.75, na.rm = TRUE), digits)) %>%
-        .drop_nan_na()
+    # fq = first quartile
+    fq <- quantile(x, 0.25, na.rm = TRUE)
+    fq <- round(fq, digits)
+    fq <- format(fq, nsmall = digits)
+    # tq = third quartile
+    tq <- quantile(x, 0.75, na.rm = TRUE)
+    tq <- round(tq, digits)
+    tq <- format(tq, nsmall = digits)
+    gsub('^NaN \\(NA\\)$', '', paste0(fq, '-', tq))
 }
 
 #' @rdname table_stats
 #' @export
 stat_medianIQR <- function(x, digits = 1) {
-    paste0(stat_median(x, digits), ' (', stat_iqr(x, digits), ')') %>%
-        .drop_nan_na()
+    med <- carpenter::stat_median(x, digits)
+    iqr <- carpenter::stat_iqr(x, digits)
+    gsub('^NaN \\(NA\\)$', '', paste0(med, ' (', iqr, ')'))
 }
 
 #' @rdname table_stats
 #' @export
 stat_mean <- function(x, digits = 1) {
-    format(round(mean(x, na.rm = TRUE), digits), nsmall = digits) %>%
-        .drop_nan_na()
+    x <- mean(x, na.rm = TRUE)
+    x <- round(x, digits)
+    x <- format(x, nsmall = digits)
+    gsub('^NaN \\(NA\\)$', '', x)
 }
 
 #' @rdname table_stats
 #' @export
 stat_stddev <- function(x, digits = 1) {
-    format(round(sd(x, na.rm = TRUE), digits), nsmall = digits) %>%
-        .drop_nan_na()
+    x <- sd(x, na.rm = TRUE)
+    x <- round(x, digits)
+    x <- format(x, nsmall = digits)
+    gsub('^NaN \\(NA\\)$', '', x)
 }
 
 #' @rdname table_stats
 #' @export
 stat_meanSD <- function(x, digits = 1) {
-    paste0(stat_mean(x, digits), ' (', stat_stddev(x, digits), ')') %>%
-        .drop_nan_na()
+    ave <- carpenter::stat_mean(x, digits)
+    std <- carpenter::stat_stddev(x, digits)
+    gsub('^NaN \\(NA\\)$', '',paste0(ave, ' (', std, ')'))
 }
 
 #' @rdname table_stats
 #' @export
 stat_nPct <- function(x, digits = 0) {
-    paste0(x, ' (', round((100*x) / sum(x), digits), '%)') %>%
-        .drop_nan_na()
-}
-
-.drop_nan_na <- function(x) {
-    gsub('^NaN \\(NA\\)$', '', x)
+    pct <- round((100*x) / sum(x), digits)
+    gsub('^NaN \\(NA\\)$', '', paste0(x, ' (', pct, '%)'))
 }
