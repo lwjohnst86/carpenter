@@ -4,29 +4,28 @@
 \alias{add_rows}
 \title{Add rows to the table with summary statistics.}
 \usage{
-add_rows(table.data, row.vars, summary.stat = function(x) mean(x),
-  digits = 2)
+add_rows(data, row_vars, stat, digits = 1)
 }
 \arguments{
-\item{table.data}{Output from the \code{outline_table} object.}
+\item{data}{Output from the \code{outline_table} object.}
 
-\item{row.vars}{The variables that you want added to the table. Must be from
-the list supplied to \code{outline_table}.}
+\item{row_vars}{The variables that you want added to the table. Must be from
+\code{outline_table}.}
 
-\item{summary.stat}{The summary statistic or any other function. A list of
+\item{stat}{The summary statistic or any other function. A list of
 built functions can be found in \code{\link{table_stats}}.}
 
-\item{digits}{}
+\item{digits}{What to round the value to.}
 }
 \value{
-Outputs a \code{table_draft} object with the variables added to the
-  rows.
+Adds a row with summary statistics for a variable.
 }
 \description{
 Add rows to the table with summary statistics.
 }
 \seealso{
 \code{\link{carpenter}} for a list of all functions, examples, and
-  accessing the introduction tutorial vignette.
+  accessing the introduction tutorial vignette. See \code{\link{table_stats}}
+  for a list of carpenter builtin statistics.
 }
 

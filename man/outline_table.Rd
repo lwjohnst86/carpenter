@@ -4,18 +4,16 @@
 \alias{outline_table}
 \title{Make an outline of the table you want to create.}
 \usage{
-outline_table(data, rows, columns)
+outline_table(data, header)
 }
 \arguments{
 \item{data}{Dataset to use to create the table}
 
-\item{table.rows}{Column or variable(s) that will make up the rows}
-
-\item{table.columns}{Column or variable(s) that will make up the columns}
+\item{header}{Column or variable(s) that will make up the rows}
 }
 \value{
 Dataframe ready for further carpentry work, like adding rows,
-  rounding, summary statistics, renaming, etc.
+  summary statistics, renaming, etc.
 }
 \description{
 Make an outline of the table you want to create.
