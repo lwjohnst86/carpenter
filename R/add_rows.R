@@ -1,146 +1,52 @@
 #' Add rows to the table with summary statistics.
 #'
-#' @param table.data Output from the \code{outline_table} object.
-#' @param row.vars The variables that you want added to the table. Must be from
-#'   the list supplied to \code{outline_table}.
-#' @param summary.stat The summary statistic or any other function. A list of
+#' @param data Output from the \code{outline_table} object.
+#' @param row_vars The variables that you want added to the table. Must be from
+#'   \code{outline_table}.
+#' @param stat The summary statistic or any other function. A list of
 #'   built functions can be found in \code{\link{table_stats}}.
-#' @param digits
+#' @param digits What to round the value to.
 #'
 #' @seealso \code{\link{carpenter}} for a list of all functions, examples, and
-#'   accessing the introduction tutorial vignette.
+#'   accessing the introduction tutorial vignette. See \code{\link{table_stats}}
+#'   for a list of carpenter builtin statistics.
 #'
-#' @return Outputs a \code{table_draft} object with the variables added to the
-#'   rows.
+#' @return Adds a row with summary statistics for a variable.
 #' @export
 #'
-add_rows <-
-    function(table.data, row.vars, summary.stat = function(x)
-        mean(x), digits = 2) {
-        UseMethod('add_rows', table.data)
+add_rows <- function(data, row_vars, stat, digits = 1) {
+    is_draft(data)
+
+    if (missing(row_vars))
+        stop('Please indicate which variables to use as the rows.')
+    vars_exist(data, row_vars)
+
+    if (missing(stat))
+        stat <- stat_mean
+    if (!is.function(stat))
+        stop('Please use a function for the `stat` arg.', call. = FALSE)
+
+    stat <- deparse(substitute(stat))
+    type <- vars_type(data, row_vars)
+    rows <- list()
+
+    current_stats <- attr(data, 'outline')$rows
+    if (!is.null(current_stats)) {
+        if (stat %in% names(current_stats)) {
+            if (type != current_stats[[stat]]$type)
+                stop('Should this statistic `', stat, '` be used with this ',
+                     type, ' data type?', call. = FALSE)
+            row_vars <- c(current_stats[[stat]]$vars, row_vars)
+        }
     }
 
-#' @export
-add_rows.table_outline <- function(table.data, row.vars = NULL,
-                                   summary.stat = NULL, digits = 1) {
-    if (is.null(row.vars))
-        row.vars <- table.data$contents.vars
+    rows[stat] <- list(list(
+        vars = row_vars,
+        stat = stat,
+        digits = digits,
+        type = type
+    ))
 
-    if (.all_numeric(table.data$data[, row.vars])) {
-        if (is.null(summary.stat))
-            summary.stat <- stat_mean
-
-        table.data$table <- table.data %>%
-            .numeric_wrangle(row.vars = row.vars, summary.stat = summary.stat,
-                             digits = digits)
-    }
-
-    if (.all_factor_char(table.data$data[, row.vars])) {
-        if (is.null(summary.stat))
-            summary.stat <- stat_nPct
-
-        table.data$table <- table.data %>%
-            .factor_wrangle(row.vars = row.vars, summary.stat = summary.stat,
-                            digits = digits)
-    }
-
-    class(table.data) <- 'table_draft'
-    return(table.data)
+    data <- outline(data = data, rows = rows)
+    return(data)
 }
-
-
-
-#' @export
-add_rows.table_draft <- function(table.data, row.vars = NULL,
-                                 summary.stat = NULL, digits = 1) {
-    if (is.null(row.vars))
-        row.vars <- names(table.data$contents.vars)
-
-    if (.all_numeric(table.data$data[, row.vars])) {
-        if (is.null(summary.stat))
-            summary.stat <- stat_mean
-
-        table.data$table <-
-            dplyr::bind_rows(
-                table.data$table,
-                table.data %>%
-                    .numeric_wrangle(
-                        row.vars = row.vars, summary.stat = summary.stat,
-                        digits = digits
-                    )
-            )
-    }
-
-    if (.all_factor_char(table.data$data[, row.vars])) {
-        if (is.null(summary.stat))
-            summary.stat <- stat_nPct
-
-        table.data$table <-
-            dplyr::bind_rows(
-                table.data$table,
-                table.data %>%
-                    .factor_wrangle(
-                        row.vars = row.vars, summary.stat = summary.stat,
-                        digits = digits
-                    )
-            )
-    }
-
-    if (!is.null(table.data$rename.rows)) {
-        rows.var <- names(table.data$table[1])
-        table.data$table <- table.data$table %>%
-            dplyr::rename_('renaming' = rows.var) %>%
-            dplyr::mutate(renaming = table.data$rename.rows(renaming))
-        names(table.data$table)[1] <- rows.var
-    }
-
-    class(table.data) <- 'table_draft'
-    return(table.data)
-}
-
-.numeric_wrangle <-
-    function(table.data, row.vars = names(table.data$contents.vars),
-             summary.stat, digits = 1) {
-        column.names <- names(table.data$header.var)
-        table.data$data %>%
-            tidyr::gather_('Row', 'Values', row.vars) %>%
-            dplyr::group_by_('Row', column.names) %>%
-            dplyr::summarize(val = summary.stat(Values, digits)) %>%
-            tidyr::spread_(column.names, 'val') %>%
-            dplyr::mutate_each_(funs(as.character), names(.))
-    }
-
-.factor_wrangle <-
-    function(table.data, row.vars = table.data$contents.vars,
-             summary.stat = stat_nPct, digits = 0) {
-        column.names <- names(table.data$header.var)
-        ds <- table.data$data
-        ds <- tidyr::gather_(ds, 'Row', 'Values', row.vars)
-        ds <- dplyr::group_by_(ds, column.names, 'Row', 'Values')
-        ds <- na.omit(dplyr::tally(ds))
-        ds <- dplyr::group_by_(ds, column.names, 'Row')
-        ds <- dplyr::mutate(ds, n = summary.stat(n, digits))
-        ds <- tidyr::spread_(ds, column.names, 'n')
-        ds <- dplyr::ungroup(ds)
-        ds <- dplyr::mutate(ds, id = 1:n())
-
-        ds <- dplyr::full_join(
-            ds,
-            ds %>%
-                dplyr::group_by_('Row') %>%
-                dplyr::tally() %>%
-                dplyr::mutate(id = cumsum(n) - n + 0.5) %>%
-                dplyr::select(-n),
-            by = c('Row', 'id')
-        )
-        ds <- dplyr::arrange(ds, id)
-        factor_rows <- ds %>%
-            dplyr::mutate(
-                Values = ifelse(is.na(Values), '', Values),
-                Row = ifelse(Values != '', '- ', as.character(Row)),
-                Row = paste0(Row, Values)
-            ) %>%
-            dplyr::select(-Values,-id)
-
-        return(factor_rows)
-    }
