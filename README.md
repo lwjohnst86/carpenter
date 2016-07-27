@@ -3,6 +3,8 @@
 carpenter: Making Tables
 ========================
 
+[![Travis-CI Build Status](https://travis-ci.org/lwjohnst86/carpenter.svg?branch=master)](https://travis-ci.org/lwjohnst86/carpenter)
+
 The main goal of carpenter to help make those pesky descriptive/basic characteristic tables often used in biomedical journal articles easier to make and put together. Right now, this package is focused on those types of tables, but I plan to expand to other similarly used table types.
 
 Installation
