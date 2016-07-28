@@ -9,8 +9,13 @@
 #' @seealso \code{\link{carpenter}} for a list of all functions, examples, and
 #'   accessing the introduction tutorial vignette.
 #'
-outline_table <- function(data, header) {
+outline_table <- function(data, header = NULL) {
     is_df(data)
+    if (is.null(header)) {
+        data <- data %>%
+            dplyr::mutate(.Use_All = factor('all'))
+        header <- '.Use_All'
+    }
     is_factor(data, header)
     outline(data = data, header = header)
 }
