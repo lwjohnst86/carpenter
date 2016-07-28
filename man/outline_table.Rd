@@ -4,7 +4,7 @@
 \alias{outline_table}
 \title{Make an outline of the table you want to create.}
 \usage{
-outline_table(data, header)
+outline_table(data, header = NULL)
 }
 \arguments{
 \item{data}{Dataset to use to create the table}

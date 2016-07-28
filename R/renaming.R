@@ -2,7 +2,7 @@
 #'
 #' @param data The \code{table_draft} object.
 #' @param type Whether to rename the row column or the headers.
-#' @param ... If type is 'row', needs to be a function (anonymous or otherwise)
+#' @param replace If type is 'row', needs to be a function (anonymous or otherwise)
 #'   using the \code{\link[base]{gsub}} function to substitute patterns, words,
 #'   characters, or symbols, etc. If type is 'header', needs to be a string of
 #'   equal length as the header to replace the header variables.

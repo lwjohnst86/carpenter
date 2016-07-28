@@ -13,7 +13,7 @@ NULL
 #' @rdname table_stats
 #' @export
 stat_median <- function(x, digits = 1) {
-    x <- median(x, na.rm = TRUE)
+    x <- stats::median(x, na.rm = TRUE)
     x <- round(x, digits)
     x <- format(x, nsmall = digits)
     gsub('^NaN \\(NA\\)$', '', x)
@@ -23,11 +23,11 @@ stat_median <- function(x, digits = 1) {
 #' @export
 stat_iqr <- function(x, digits = 1) {
     # fq = first quartile
-    fq <- quantile(x, 0.25, na.rm = TRUE)
+    fq <- stats::quantile(x, 0.25, na.rm = TRUE)
     fq <- round(fq, digits)
     fq <- format(fq, nsmall = digits)
     # tq = third quartile
-    tq <- quantile(x, 0.75, na.rm = TRUE)
+    tq <- stats::quantile(x, 0.75, na.rm = TRUE)
     tq <- round(tq, digits)
     tq <- format(tq, nsmall = digits)
     gsub('^NaN \\(NA\\)$', '', paste0(fq, '-', tq))
@@ -53,7 +53,7 @@ stat_mean <- function(x, digits = 1) {
 #' @rdname table_stats
 #' @export
 stat_stddev <- function(x, digits = 1) {
-    x <- sd(x, na.rm = TRUE)
+    x <- stats::sd(x, na.rm = TRUE)
     x <- round(x, digits)
     x <- format(x, nsmall = digits)
     gsub('^NaN \\(NA\\)$', '', x)
