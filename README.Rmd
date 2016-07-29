@@ -54,7 +54,7 @@ the context of descriptive/basic characteristic tables often seen in biomedical
 research). Even still, they are very useful to look over and learn about!
 
 - [`pander`](http://rapporter.github.io/pander/)
-- [`pixiedust`](https://cran.r-project.org/web/packages/pixiedust/vignettes/pixiedust.html)
-- [`stargazer`](https://cran.r-project.org/web/packages/stargazer/index.html)
+- [`pixiedust`](https://cran.r-project.org/package=pixiedust)
+- [`stargazer`](https://cran.r-project.org/package=stargazer)
 ([tutorial](http://jakeruss.com/cheatsheets/stargazer.html))
-- [`htmlTable`](https://cran.r-project.org/web/packages/htmlTable/index.html)
+- [`htmlTable`](https://cran.r-project.org/package=htmlTable)

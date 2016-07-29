@@ -43,6 +43,6 @@ Resources
 There are several packages out there that help with making tables. They work to output and customize the tables into a given format, for instance markdown or html, but assume the data is in the form you already want to present it in. So they don't help with getting the data into the format as a table (in the context of descriptive/basic characteristic tables often seen in biomedical research). Even still, they are very useful to look over and learn about!
 
 -   [`pander`](http://rapporter.github.io/pander/)
--   [`pixiedust`](https://cran.r-project.org/web/packages/pixiedust/vignettes/pixiedust.html)
--   [`stargazer`](https://cran.r-project.org/web/packages/stargazer/index.html) ([tutorial](http://jakeruss.com/cheatsheets/stargazer.html))
--   [`htmlTable`](https://cran.r-project.org/web/packages/htmlTable/index.html)
+-   [`pixiedust`](https://cran.r-project.org/package=pixiedust)
+-   [`stargazer`](https://cran.r-project.org/package=stargazer) ([tutorial](http://jakeruss.com/cheatsheets/stargazer.html))
+-   [`htmlTable`](https://cran.r-project.org/package=htmlTable)
