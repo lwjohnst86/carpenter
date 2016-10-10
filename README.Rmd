@@ -7,6 +7,7 @@ output: github_document
 # carpenter: Making Tables
 
 [![Travis-CI Build Status](https://travis-ci.org/lwjohnst86/carpenter.svg?branch=master)](https://travis-ci.org/lwjohnst86/carpenter)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/carpenter)](https://cran.r-project.org/package=carpenter)
 
 The main goal of carpenter to help make those pesky descriptive/basic
 characteristic tables often used in biomedical journal articles easier to make
@@ -23,9 +24,17 @@ knitr::opts_chunk$set(
 
 # Installation
 
-It's up on GitHub right now, so to install:
+This package is on CRAN, so install using: 
 
-    devtools::install_github('lwjohnst86/carpenter')
+```{r, eval=FALSE}
+install.packages('carpenter')
+```
+
+For the developmental version, install from GitHub:
+
+```{r, eval=FALSE}
+devtools::install_github('lwjohnst86/carpenter')
+```
 
 # Example usage
 
