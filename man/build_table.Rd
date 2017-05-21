@@ -34,4 +34,3 @@ Output can be to common formats such as rmarkdown, html, etc, based on the
 \code{\link{carpenter}} for a list of all functions, examples, and
   accessing the introduction tutorial vignette.
 }
-

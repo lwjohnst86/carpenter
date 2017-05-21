@@ -27,4 +27,3 @@ Renaming row and header variables.
 \code{\link{carpenter}} for a list of all functions, examples, and
   accessing the introduction tutorial vignette.
 }
-
