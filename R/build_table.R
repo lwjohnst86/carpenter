@@ -52,7 +52,7 @@ build_table <-
         if (!is.null(sketch$rename_rows)) {
             replacing <- sketch$rename_rows
             draft_table <- draft_table %>%
-                dplyr::mutate_each_(dplyr::funs(replacing), 'Variables')
+                dplyr::mutate_at("Variables", dplyr::funs(replacing))
         }
 
         if (!is.null(sketch$rename_header)) {
@@ -63,13 +63,14 @@ build_table <-
         }
 
         if (finish) {
+            draft_table <- as.data.frame(draft_table)
             pander::pander(
                 draft_table,
                 caption = caption,
                 style = style,
                 split.table = split,
                 missing = missing,
-                justify = c('left', rep(alignment, times = length(draft_table)-1))
+                justify = c('left', rep(alignment, times = length(draft_table) - 1))
             )
         } else {
             draft_table
@@ -94,7 +95,7 @@ make_numeric_row <-
             dplyr::full_join(row_id, by = 'Variables') %>%
             dplyr::arrange_('id') %>%
             dplyr::select_('-id') %>%
-            dplyr::mutate_each_(dplyr::funs(as.character), dplyr::everything()) %>%
+            dplyr::mutate_all(dplyr::funs(as.character)) %>%
             dplyr::ungroup()
     }
 
