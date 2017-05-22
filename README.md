@@ -54,3 +54,4 @@ There are several packages out there that help with making tables. They work to 
 -   [`pixiedust`](https://cran.r-project.org/package=pixiedust)
 -   [`stargazer`](https://cran.r-project.org/package=stargazer) ([tutorial](http://jakeruss.com/cheatsheets/stargazer.html))
 -   [`htmlTable`](https://cran.r-project.org/package=htmlTable)
+-   [`tableone`](https://cran.r-project.org/package=tableone)

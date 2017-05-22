@@ -28,4 +28,3 @@ Add rows to the table with summary statistics.
   accessing the introduction tutorial vignette. See \code{\link{table_stats}}
   for a list of carpenter builtin statistics.
 }
-

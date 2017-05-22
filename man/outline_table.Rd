@@ -22,4 +22,3 @@ Make an outline of the table you want to create.
 \code{\link{carpenter}} for a list of all functions, examples, and
   accessing the introduction tutorial vignette.
 }
-

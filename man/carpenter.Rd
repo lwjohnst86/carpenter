@@ -24,4 +24,3 @@ outline_table(iris, 'Species') \%>\%
   summary statistics. For a more detailed walkthrough of carpenter, see the
   introduction vignette using \code{vignette('carpenter')}.
 }
-
