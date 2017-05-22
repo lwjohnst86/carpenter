@@ -1,4 +1,4 @@
-# carpenter 0.2.1.9000
+# carpenter 0.2.1
 
 ## Bug fixes
 

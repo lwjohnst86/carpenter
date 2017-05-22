@@ -1,7 +1,7 @@
 Package: carpenter
 Type: Package
 Title: Build Common Tables of Summary Statistics for Reports
-Version: 0.2.1.9000
+Version: 0.2.1
 Authors@R: person("Luke", "Johnston", email = "lwjohnst@gmail.com",
     role = c("aut", "cre"))
 Description: Mainly used to build tables that are commonly presented for
