@@ -102,6 +102,8 @@ make_numeric_row <-
 make_factor_row <-
     function(data, header, rows, stat, digits) {
         data <- tidyr::gather_(data, 'Variables', 'Values', rows) %>%
+            dplyr::mutate_(Values = "factor(Values, levels = unique(Values),
+                           labels = unique(Values))") %>%
             dplyr::group_by_(header, 'Variables', 'Values') %>%
             dplyr::tally() %>%
             stats::na.omit()
@@ -124,7 +126,7 @@ make_factor_row <-
         )
         dplyr::arrange_(data, 'id') %>%
             dplyr::mutate_(
-                Values = "ifelse(is.na(Values), '', Values)",
+                Values = "ifelse(is.na(Values), '', as.character(Values))",
                 Variables = "ifelse(Values != '', '- ', as.character(Variables))",
                 Variables = "paste0(Variables, Values)"
             ) %>%
