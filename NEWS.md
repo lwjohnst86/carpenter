@@ -2,7 +2,7 @@
 
 ## Bug fixes
 
-* Fixed issue where factor ordering changes (#10; #11)
+* Fixed issue where factor ordering changes (#11; #13)
 
 # carpenter 0.2.1
 
