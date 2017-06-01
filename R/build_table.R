@@ -101,34 +101,49 @@ make_numeric_row <-
 
 make_factor_row <-
     function(data, header, rows, stat, digits) {
-        data <- tidyr::gather_(data, 'Variables', 'Values', rows) %>%
-            dplyr::mutate_(Values = "factor(Values, levels = unique(Values),
-                           labels = unique(Values))") %>%
-            dplyr::group_by_(header, 'Variables', 'Values') %>%
-            dplyr::tally() %>%
-            stats::na.omit()
+        factor_levels <- unlist(lapply(data[rows], levels))
+        variable_names_pattern <- paste0("(", paste(rows, collapse = "|"), ").*")
+        variable_names <- gsub(variable_names_pattern, "\\1", names(factor_levels))
 
-        data <- dplyr::group_by_(data, header, 'Variables') %>%
+        factor_levels_df <-
+            dplyr::data_frame(Variables = variable_names,
+                              Values = factor_levels) %>%
+            dplyr::group_by_("Variables") %>%
+            dplyr::mutate(ValOrder = 1:n())
+
+        variable_names_order <- dplyr::data_frame(Variables = rows,
+                                                  VarOrder = 1:length(rows))
+
+        factor_summary <- data %>%
+            dplyr::mutate_at(rows, as.numeric) %>%
+            tidyr::gather_('Variables', 'ValOrder', rows) %>%
+            dplyr::group_by_(header, 'Variables', 'ValOrder') %>%
+            dplyr::tally() %>%
+            stats::na.omit() %>%
+            dplyr::ungroup() %>%
+            dplyr::full_join(factor_levels_df, by = c('Variables', "ValOrder"))
+
+        factor_summary <- factor_summary %>%
+            dplyr::group_by_(header, 'Variables') %>%
             dplyr::mutate_(n = lazyeval::interp('stat(n, digits)',
                                                 stat = stat, digits = digits)) %>%
             tidyr::spread_(header, 'n') %>%
             dplyr::ungroup() %>%
-            dplyr::mutate_(id = lazyeval::interp('1:n()'))
+            dplyr::full_join(variable_names_order, by = "Variables") %>%
+            dplyr::arrange_("VarOrder", "ValOrder")
 
-        data <- dplyr::full_join(
-            data,
-            data %>%
-                dplyr::group_by_('Variables') %>%
-                dplyr::tally() %>%
-                dplyr::mutate_(id = 'cumsum(n) - n + 0.5') %>%
-                dplyr::select_('-n'),
-            by = c('Variables', 'id')
+        factor_pretable <- dplyr::full_join(
+            factor_summary,
+            dplyr::data_frame(VarOrder = 1:length(rows) - 0.5,
+                              Variables = rows),
+            by = c('Variables', 'VarOrder')
         )
-        dplyr::arrange_(data, 'id') %>%
+
+        dplyr::arrange_(factor_pretable, 'VarOrder', "ValOrder") %>%
             dplyr::mutate_(
                 Values = "ifelse(is.na(Values), '', as.character(Values))",
                 Variables = "ifelse(Values != '', '- ', as.character(Variables))",
                 Variables = "paste0(Variables, Values)"
             ) %>%
-            dplyr::select_('-Values', '-id')
+            dplyr::select_('-Values', "-ValOrder", "-VarOrder")
     }
