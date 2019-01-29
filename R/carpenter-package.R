@@ -1,11 +1,11 @@
 #' Build common tables for your research needs!
 #'
 #' @name carpenter
-#' @seealso \code{\link{add_rows}} to add rows to the table,
-#'   \code{\link{renaming}} for renaming of columns and rows,
-#'   \code{\link{build_table}}, \code{\link{table_stats}} for a list of built-in
+#' @seealso [add_rows()] to add rows to the table,
+#'   [renaming()] for renaming of columns and rows,
+#'   [build_table()], [table_stats()] for a list of built-in
 #'   summary statistics. For a more detailed walkthrough of carpenter, see the
-#'   introduction vignette using \code{vignette('carpenter')}.
+#'   introduction vignette using `vignette('carpenter')`.
 #' @importFrom magrittr '%>%'
 #'
 #' @examples

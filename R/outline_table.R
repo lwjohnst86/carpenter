@@ -6,7 +6,7 @@
 #' @return Dataframe ready for further carpentry work, like adding rows,
 #'   summary statistics, renaming, etc.
 #' @export
-#' @seealso \code{\link{carpenter}} for a list of all functions, examples, and
+#' @seealso [carpenter()] for a list of all functions, examples, and
 #'   accessing the introduction tutorial vignette.
 #'
 outline_table <- function(data, header = NULL) {

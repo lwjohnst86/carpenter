@@ -1,14 +1,14 @@
 #' Add rows to the table with summary statistics.
 #'
-#' @param data Output from the \code{outline_table} object.
+#' @param data Output from the `outline_table` object.
 #' @param row_vars The variables that you want added to the table. Must be from
-#'   \code{outline_table}.
+#'   `outline_table`.
 #' @param stat The summary statistic or any other function. A list of
-#'   built functions can be found in \code{\link{table_stats}}.
+#'   built functions can be found in [table_stats()].
 #' @param digits What to round the value to.
 #'
-#' @seealso \code{\link{carpenter}} for a list of all functions, examples, and
-#'   accessing the introduction tutorial vignette. See \code{\link{table_stats}}
+#' @seealso [carpenter()] for a list of all functions, examples, and
+#'   accessing the introduction tutorial vignette. See [table_stats()]
 #'   for a list of carpenter builtin statistics.
 #'
 #' @return Adds a row with summary statistics for a variable.

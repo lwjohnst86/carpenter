@@ -1,11 +1,11 @@
-#' Common summary statistics to use in \code{\link{add_rows}}.
+#' Common summary statistics to use in [add_rows()].
 #'
 #' @name table_stats
 #' @param x Numeric vector to use to calculate the statistic
 #' @param digits Number of digits to use
 #'
 #' @return Create a single character string with the summary statistic
-#' @seealso \code{\link{carpenter}} for a list of all functions, examples, and
+#' @seealso [carpenter()] for a list of all functions, examples, and
 #'   accessing the introduction tutorial vignette.
 #'
 NULL

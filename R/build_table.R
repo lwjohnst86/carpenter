@@ -1,7 +1,7 @@
 #' Build the final table.
 #'
 #' Output can be to common formats such as rmarkdown, html, etc, based on the
-#' \code{style} argument of the \code{\link[pander]{pander}} function.
+#' `style` argument of the [pander::pander()] function.
 #'
 #' @param data The draft table object.
 #' @param caption Table caption.
@@ -12,9 +12,9 @@
 #' @param alignment Table column alignment.
 #' @param finish Generate the final table in markdown formatted form.
 #'
-#' @return Creates a \code{\link[pander]{pander}} created table.
+#' @return Creates a [pander::pander()] created table.
 #' @export
-#' @seealso \code{\link{carpenter}} for a list of all functions, examples, and
+#' @seealso [carpenter()] for a list of all functions, examples, and
 #'   accessing the introduction tutorial vignette.
 build_table <-
     function(data,
