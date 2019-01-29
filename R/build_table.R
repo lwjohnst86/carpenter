@@ -86,15 +86,15 @@ make_numeric_row <-
             Variables = rows,
             stringsAsFactors = FALSE
         )
-        dplyr::select_(data, .dots = c(header, rows)) %>%
-            tidyr::gather_('Variables', 'Values', rows) %>%
-            dplyr::group_by_('Variables', header) %>%
+        dplyr::select_at(data, c(header, rows)) %>%
+            tidyr::gather('Variables', 'Values', rows) %>%
+            dplyr::group_by_at(c('Variables', header)) %>%
             dplyr::summarize_(val = lazyeval::interp('stat(Values, digits = digits)',
                                                      digits = digits, stat = stat)) %>%
-            tidyr::spread_(header, 'val') %>%
+            tidyr::spread(header, 'val') %>%
             dplyr::full_join(row_id, by = 'Variables') %>%
-            dplyr::arrange_('id') %>%
-            dplyr::select_('-id') %>%
+            dplyr::arrange_at('id') %>%
+            dplyr::select_at(dplyr::vars(-'id')) %>%
             dplyr::mutate_all(dplyr::funs(as.character)) %>%
             dplyr::ungroup()
     }
@@ -108,29 +108,29 @@ make_factor_row <-
         factor_levels_df <-
             dplyr::data_frame(Variables = variable_names,
                               Values = factor_levels) %>%
-            dplyr::group_by_("Variables") %>%
-            dplyr::mutate(ValOrder = 1:n())
+            dplyr::group_by_at("Variables") %>%
+            dplyr::mutate(ValOrder = 1:dplyr::n())
 
         variable_names_order <- dplyr::data_frame(Variables = rows,
                                                   VarOrder = 1:length(rows))
 
         factor_summary <- data %>%
             dplyr::mutate_at(rows, as.numeric) %>%
-            tidyr::gather_('Variables', 'ValOrder', rows) %>%
-            dplyr::group_by_(header, 'Variables', 'ValOrder') %>%
+            tidyr::gather('Variables', 'ValOrder', rows) %>%
+            dplyr::group_by_at(c(header, 'Variables', 'ValOrder')) %>%
             dplyr::tally() %>%
             stats::na.omit() %>%
             dplyr::ungroup() %>%
             dplyr::full_join(factor_levels_df, by = c('Variables', "ValOrder"))
 
         factor_summary <- factor_summary %>%
-            dplyr::group_by_(header, 'Variables') %>%
+            dplyr::group_by_at(c(header, 'Variables')) %>%
             dplyr::mutate_(n = lazyeval::interp('stat(n, digits)',
                                                 stat = stat, digits = digits)) %>%
-            tidyr::spread_(header, 'n') %>%
+            tidyr::spread(header, 'n') %>%
             dplyr::ungroup() %>%
             dplyr::full_join(variable_names_order, by = "Variables") %>%
-            dplyr::arrange_("VarOrder", "ValOrder")
+            dplyr::arrange_at(c("VarOrder", "ValOrder"))
 
         factor_pretable <- dplyr::full_join(
             factor_summary,
@@ -139,11 +139,11 @@ make_factor_row <-
             by = c('Variables', 'VarOrder')
         )
 
-        dplyr::arrange_(factor_pretable, 'VarOrder', "ValOrder") %>%
+        dplyr::arrange_at(factor_pretable, c("VarOrder", "ValOrder")) %>%
             dplyr::mutate_(
                 Values = "ifelse(is.na(Values), '', as.character(Values))",
                 Variables = "ifelse(Values != '', '- ', as.character(Variables))",
                 Variables = "paste0(Variables, Values)"
             ) %>%
-            dplyr::select_('-Values', "-ValOrder", "-VarOrder")
+            dplyr::select_at(dplyr::vars(-"Values", -"ValOrder", -"VarOrder"))
     }
