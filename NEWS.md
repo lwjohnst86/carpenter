@@ -3,6 +3,8 @@
 ## Bug fixes
 
 * Fixed issue where factor ordering changes (#11; #13)
+* Fix errors due to update to dplyr (explicitly define `dplyr::n()`) and switch
+over to using `_at` dplyr versions.
 
 # carpenter 0.2.1
 
