@@ -12,18 +12,18 @@ renaming(data, type = c("rows", "header"), replace)
 \item{type}{Whether to rename the row column or the headers.}
 
 \item{replace}{If type is 'row', needs to be a function (anonymous or otherwise)
-using the \code{\link[base]{gsub}} function to substitute patterns, words,
+using the \code{\link[base:gsub]{base::gsub()}} function to substitute patterns, words,
 characters, or symbols, etc. If type is 'header', needs to be a string of
 equal length as the header to replace the header variables.}
 }
 \value{
 Adds to the table outline to rename the rows and/or header variables
-  in the final table.
+in the final table.
 }
 \description{
 Renaming row and header variables.
 }
 \seealso{
-\code{\link{carpenter}} for a list of all functions, examples, and
-  accessing the introduction tutorial vignette.
+\code{\link[=carpenter]{carpenter()}} for a list of all functions, examples, and
+accessing the introduction tutorial vignette.
 }

@@ -9,7 +9,7 @@
 \alias{stat_stddev}
 \alias{stat_meanSD}
 \alias{stat_nPct}
-\title{Common summary statistics to use in \code{\link{add_rows}}.}
+\title{Common summary statistics to use in \code{\link[=add_rows]{add_rows()}}.}
 \usage{
 stat_median(x, digits = 1)
 
@@ -34,9 +34,9 @@ stat_nPct(x, digits = 0)
 Create a single character string with the summary statistic
 }
 \description{
-Common summary statistics to use in \code{\link{add_rows}}.
+Common summary statistics to use in \code{\link[=add_rows]{add_rows()}}.
 }
 \seealso{
-\code{\link{carpenter}} for a list of all functions, examples, and
-  accessing the introduction tutorial vignette.
+\code{\link[=carpenter]{carpenter()}} for a list of all functions, examples, and
+accessing the introduction tutorial vignette.
 }

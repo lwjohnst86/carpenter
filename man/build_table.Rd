@@ -24,13 +24,13 @@ table be.}
 \item{finish}{Generate the final table in markdown formatted form.}
 }
 \value{
-Creates a \code{\link[pander]{pander}} created table.
+Creates a \code{\link[pander:pander]{pander::pander()}} created table.
 }
 \description{
 Output can be to common formats such as rmarkdown, html, etc, based on the
-\code{style} argument of the \code{\link[pander]{pander}} function.
+\code{style} argument of the \code{\link[pander:pander]{pander::pander()}} function.
 }
 \seealso{
-\code{\link{carpenter}} for a list of all functions, examples, and
-  accessing the introduction tutorial vignette.
+\code{\link[=carpenter]{carpenter()}} for a list of all functions, examples, and
+accessing the introduction tutorial vignette.
 }

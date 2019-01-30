@@ -13,12 +13,12 @@ outline_table(data, header = NULL)
 }
 \value{
 Dataframe ready for further carpentry work, like adding rows,
-  summary statistics, renaming, etc.
+summary statistics, renaming, etc.
 }
 \description{
 Make an outline of the table you want to create.
 }
 \seealso{
-\code{\link{carpenter}} for a list of all functions, examples, and
-  accessing the introduction tutorial vignette.
+\code{\link[=carpenter]{carpenter()}} for a list of all functions, examples, and
+accessing the introduction tutorial vignette.
 }

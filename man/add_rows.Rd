@@ -13,18 +13,19 @@ add_rows(data, row_vars, stat, digits = 1)
 \code{outline_table}.}
 
 \item{stat}{The summary statistic or any other function. A list of
-built functions can be found in \code{\link{table_stats}}.}
+built functions can be found in \code{\link[=table_stats]{table_stats()}}.}
 
 \item{digits}{What to round the value to.}
 }
 \value{
-Adds a row with summary statistics for a variable.
+Adds a row with summary statistics for a variable. Is a
+\link[tibble:tibble-package]{tibble}.
 }
 \description{
 Add rows to the table with summary statistics.
 }
 \seealso{
-\code{\link{carpenter}} for a list of all functions, examples, and
-  accessing the introduction tutorial vignette. See \code{\link{table_stats}}
-  for a list of carpenter builtin statistics.
+\code{\link[=carpenter]{carpenter()}} for a list of all functions, examples, and
+accessing the introduction tutorial vignette. See \code{\link[=table_stats]{table_stats()}}
+for a list of carpenter builtin statistics.
 }
