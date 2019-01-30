@@ -11,7 +11,8 @@
 #'   accessing the introduction tutorial vignette. See [table_stats()]
 #'   for a list of carpenter builtin statistics.
 #'
-#' @return Adds a row with summary statistics for a variable.
+#' @return Adds a row with summary statistics for a variable. Is a
+#'   [tibble][tibble::tibble-package].
 #' @export
 #'
 add_rows <- function(data, row_vars, stat, digits = 1) {
