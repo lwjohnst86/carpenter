@@ -1,7 +1,5 @@
 # carpenter 0.2.2
 
-# carpenter 0.2.1.9000
-
 ## Bug fixes
 
 * Fixed issue where factor ordering changes (#11; #13)
