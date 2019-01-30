@@ -3,7 +3,7 @@ Type: Package
 Title: Build Common Tables of Summary Statistics for Reports
 Version: 0.2.2
 Authors@R: person("Luke", "Johnston", email = "lwjohnst@gmail.com",
-    role = c("aut", "cre"))
+    role = c("aut", "cre"), comment = c(ORCID = "0000-0003-4169-2616"))
 Description: Mainly used to build tables that are commonly presented for
     bio-medical/health research, such as basic characteristic tables or
     descriptive statistics.
@@ -28,3 +28,4 @@ VignetteBuilder: knitr
 URL: https://github.com/lwjohnst86/carpenter
 BugReports: https://github.com/lwjohnst86/carpenter/issues
 Roxygen: list(markdown = TRUE)
+Encoding: UTF-8
