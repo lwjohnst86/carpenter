@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build common tables for your research needs! — carpenter • carpenter</title>
+<title>Pipe operator — %&gt;% • carpenter</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Build common tables for your research needs! — carpenter" />
+<meta property="og:title" content="Pipe operator — %&gt;%" />
 
-<meta property="og:description" content="Build common tables for your research needs!" />
+<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
 
 <meta property="og:image" content="http://carpenter.lukewjohnston.com/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -107,57 +107,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build common tables for your research needs!</h1>
-    <small class="dont-index">Source: <a href='https://github.com/lwjohnst86/carpenter/blob/master/R/carpenter-package.R'><code>R/carpenter-package.R</code></a></small>
-    <div class="hidden name"><code>carpenter.Rd</code></div>
+    <h1>Pipe operator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/lwjohnst86/carpenter/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
+    <div class="hidden name"><code>pipe.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Build common tables for your research needs!</p>
+    <p>See <code>magrittr::%&gt;%</code> for details.</p>
     
     </div>
 
+    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
         
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='add_rows.html'>add_rows()</a></code> to add rows to the table,
-<code><a href='renaming.html'>renaming()</a></code> for renaming of columns and rows,
-<code><a href='build_table.html'>build_table()</a></code>, <code><a href='table_stats.html'>table_stats()</a></code> for a list of built-in
-summary statistics. For a more detailed walkthrough of carpenter, see the
-introduction vignette using <code><a href='../articles/carpenter.html'>vignette('carpenter')</a></code>.</p></div>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>magrittr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘magrittr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:testthat’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    equals, is_less_than, not</span></div><div class='input'><span class='fu'><a href='outline_table.html'>outline_table</a></span>(<span class='no'>iris</span>, <span class='st'>'Species'</span>) <span class='kw'>%&gt;%</span>
- <span class='fu'><a href='add_rows.html'>add_rows</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'Sepal.Length'</span>, <span class='st'>'Petal.Length'</span>), <span class='no'>stat_meanSD</span>) <span class='kw'>%&gt;%</span>
- <span class='fu'><a href='add_rows.html'>add_rows</a></span>(<span class='st'>'Sepal.Width'</span>, <span class='no'>stat_medianIQR</span>) <span class='kw'>%&gt;%</span>
- <span class='fu'><a href='renaming.html'>renaming</a></span>(<span class='st'>'rows'</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/grep'>gsub</a></span>(<span class='st'>'Sepal\\.'</span>, <span class='st'>'Sepal '</span>, <span class='no'>x</span>)) <span class='kw'>%&gt;%</span>
- <span class='fu'><a href='renaming.html'>renaming</a></span>(<span class='st'>'header'</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'Measures'</span>, <span class='st'>'Setosa'</span>, <span class='st'>'Versicolor'</span>, <span class='st'>'Virginica'</span>)) <span class='kw'>%&gt;%</span>
- <span class='fu'><a href='build_table.html'>build_table</a></span>(<span class='kw'>caption</span> <span class='kw'>=</span> <span class='st'>'A caption for the table'</span>)</div><div class='output co'>#&gt; 
-#&gt; 
-#&gt; | Measures     |    Setosa     |  Versicolor   |   Virginica   |
-#&gt; |:-------------|:-------------:|:-------------:|:-------------:|
-#&gt; | Sepal Length |   5.0 (0.4)   |   5.9 (0.5)   |   6.6 (0.6)   |
-#&gt; | Petal.Length |   1.5 (0.2)   |   4.3 (0.5)   |   5.6 (0.6)   |
-#&gt; | Sepal Width  | 3.4 (3.2-3.7) | 2.8 (2.5-3.0) | 3.0 (2.8-3.2) |
-#&gt; 
-#&gt; Table: A caption for the table
-#&gt; </div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>
