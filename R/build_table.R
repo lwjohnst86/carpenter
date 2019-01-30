@@ -91,12 +91,12 @@ make_numeric_row <-
             dplyr::group_by_at(c('Variables', header)) %>%
             dplyr::summarize_(val = lazyeval::interp('stat(Values, digits = digits)',
                                                      digits = digits, stat = stat)) %>%
+            dplyr::ungroup() %>%
             tidyr::spread(header, 'val') %>%
             dplyr::full_join(row_id, by = 'Variables') %>%
             dplyr::arrange_at('id') %>%
             dplyr::select_at(dplyr::vars(-'id')) %>%
-            dplyr::mutate_all(dplyr::funs(as.character)) %>%
-            dplyr::ungroup()
+            dplyr::mutate_all(dplyr::funs(as.character))
     }
 
 make_factor_row <-
