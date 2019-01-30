@@ -6,6 +6,7 @@
 #'   [build_table()], [table_stats()] for a list of built-in
 #'   summary statistics. For a more detailed walkthrough of carpenter, see the
 #'   introduction vignette using `vignette('carpenter')`.
+#' @importFrom tibble tibble
 #'
 #' @examples
 #'
