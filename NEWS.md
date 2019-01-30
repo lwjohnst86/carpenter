@@ -6,6 +6,10 @@
 * Fix errors due to update to dplyr (explicitly define `dplyr::n()`) and switch
 over to using `_at` dplyr versions.
 
+## General additions
+
+* Add code coverage and appveyor.
+
 # carpenter 0.2.1
 
 ## Bug fixes
