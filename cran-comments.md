@@ -1,3 +1,8 @@
+
+## Resubmission
+
+* Fixed note about dead link in vignette
+
 ## Test environments
 
 * local ubuntu 18.04 install, R 3.5.2
