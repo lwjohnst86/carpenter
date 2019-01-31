@@ -72,6 +72,5 @@ they are very useful to look over and learn about\!
   - [`pander`](http://rapporter.github.io/pander/)
   - [`pixiedust`](https://cran.r-project.org/package=pixiedust)
   - [`stargazer`](https://cran.r-project.org/package=stargazer)
-    ([tutorial](http://jakeruss.com/cheatsheets/stargazer.html))
   - [`htmlTable`](https://cran.r-project.org/package=htmlTable)
   - [`tableone`](https://cran.r-project.org/package=tableone)
