@@ -16,9 +16,9 @@ Imports:
     pander,
     utils,
     stats,
-    lazyeval,
-    tibble
-RoxygenNote: 6.1.1
+    tibble,
+    rlang
+RoxygenNote: 7.3.3
 Suggests: 
     knitr,
     rmarkdown,

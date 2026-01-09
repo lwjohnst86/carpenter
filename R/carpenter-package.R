@@ -1,3 +1,6 @@
+# Global variables
+utils::globalVariables(c("Values", "n"))
+
 #' Build common tables for your research needs!
 #'
 #' @name carpenter
@@ -7,6 +10,7 @@
 #'   summary statistics. For a more detailed walkthrough of carpenter, see the
 #'   introduction vignette using `vignette('carpenter')`.
 #' @importFrom tibble tibble
+#' @importFrom rlang .data
 #'
 #' @examples
 #'

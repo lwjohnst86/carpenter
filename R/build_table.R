@@ -52,7 +52,7 @@ build_table <-
         if (!is.null(sketch$rename_rows)) {
             replacing <- sketch$rename_rows
             draft_table <- draft_table %>%
-                dplyr::mutate_at("Variables", dplyr::funs(replacing))
+                dplyr::mutate(Variables = replacing(.data$Variables))
         }
 
         if (!is.null(sketch$rename_header)) {
@@ -86,17 +86,15 @@ make_numeric_row <-
             Variables = rows,
             stringsAsFactors = FALSE
         )
-        dplyr::select_at(data, c(header, rows)) %>%
-            tidyr::gather('Variables', 'Values', rows) %>%
-            dplyr::group_by_at(c('Variables', header)) %>%
-            dplyr::summarize_(val = lazyeval::interp('stat(Values, digits = digits)',
-                                                     digits = digits, stat = stat)) %>%
-            dplyr::ungroup() %>%
+        dplyr::select(data, dplyr::all_of(c(header, rows))) %>%
+            tidyr::gather('Variables', 'Values', dplyr::all_of(rows)) %>%
+            dplyr::group_by(dplyr::across(dplyr::all_of(c('Variables', header)))) %>%
+            dplyr::summarize(val = stat(Values, digits = digits), .groups = "drop") %>%
             tidyr::spread(header, 'val') %>%
             dplyr::full_join(row_id, by = 'Variables') %>%
-            dplyr::arrange_at('id') %>%
-            dplyr::select_at(dplyr::vars(-'id')) %>%
-            dplyr::mutate_all(dplyr::funs(as.character))
+            dplyr::arrange(.data$id) %>%
+            dplyr::select(-"id") %>%
+            dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
     }
 
 make_factor_row <-
@@ -106,44 +104,43 @@ make_factor_row <-
         variable_names <- gsub(variable_names_pattern, "\\1", names(factor_levels))
 
         factor_levels_df <-
-            dplyr::data_frame(Variables = variable_names,
+            tibble::tibble(Variables = variable_names,
                               Values = factor_levels) %>%
-            dplyr::group_by_at("Variables") %>%
+            dplyr::group_by(.data$Variables) %>%
             dplyr::mutate(ValOrder = 1:dplyr::n())
 
-        variable_names_order <- dplyr::data_frame(Variables = rows,
+        variable_names_order <- tibble::tibble(Variables = rows,
                                                   VarOrder = 1:length(rows))
 
         factor_summary <- data %>%
-            dplyr::mutate_at(rows, as.numeric) %>%
-            tidyr::gather('Variables', 'ValOrder', rows) %>%
-            dplyr::group_by_at(c(header, 'Variables', 'ValOrder')) %>%
+            dplyr::mutate(dplyr::across(dplyr::all_of(rows), as.numeric)) %>%
+            tidyr::gather('Variables', 'ValOrder', dplyr::all_of(rows)) %>%
+            dplyr::group_by(dplyr::across(dplyr::all_of(c(header, 'Variables', 'ValOrder')))) %>%
             dplyr::tally() %>%
             stats::na.omit() %>%
             dplyr::ungroup() %>%
             dplyr::full_join(factor_levels_df, by = c('Variables', "ValOrder"))
 
         factor_summary <- factor_summary %>%
-            dplyr::group_by_at(c(header, 'Variables')) %>%
-            dplyr::mutate_(n = lazyeval::interp('stat(n, digits)',
-                                                stat = stat, digits = digits)) %>%
+            dplyr::group_by(dplyr::across(dplyr::all_of(c(header, 'Variables')))) %>%
+            dplyr::mutate(n = stat(n, digits)) %>%
             tidyr::spread(header, 'n') %>%
             dplyr::ungroup() %>%
             dplyr::full_join(variable_names_order, by = "Variables") %>%
-            dplyr::arrange_at(c("VarOrder", "ValOrder"))
+            dplyr::arrange(.data$VarOrder, .data$ValOrder)
 
         factor_pretable <- dplyr::full_join(
             factor_summary,
-            dplyr::data_frame(VarOrder = 1:length(rows) - 0.5,
+            tibble::tibble(VarOrder = 1:length(rows) - 0.5,
                               Variables = rows),
             by = c('Variables', 'VarOrder')
         )
 
-        dplyr::arrange_at(factor_pretable, c("VarOrder", "ValOrder")) %>%
-            dplyr::mutate_(
-                Values = "ifelse(is.na(Values), '', as.character(Values))",
-                Variables = "ifelse(Values != '', '- ', as.character(Variables))",
-                Variables = "paste0(Variables, Values)"
+        dplyr::arrange(factor_pretable, .data$VarOrder, .data$ValOrder) %>%
+            dplyr::mutate(
+                Values = ifelse(is.na(.data$Values), '', as.character(.data$Values)),
+                Variables = ifelse(.data$Values != '', '- ', as.character(.data$Variables)),
+                Variables = paste0(.data$Variables, .data$Values)
             ) %>%
-            dplyr::select_at(dplyr::vars(-"Values", -"ValOrder", -"VarOrder"))
+            dplyr::select(-"Values", -"ValOrder", -"VarOrder")
     }
