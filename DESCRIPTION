@@ -24,7 +24,7 @@ Suggests:
     testthat,
     covr
 VignetteBuilder: knitr
-URL: https://github.com/lwjohnst86/carpenter
+URL: https://github.com/lwjohnst86/carpenter, http://lwjohnst86.github.io/carpenter/
 BugReports: https://github.com/lwjohnst86/carpenter/issues
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
