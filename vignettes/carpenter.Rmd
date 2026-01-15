@@ -109,7 +109,7 @@ tab
 ```
 
 And finally build the table into a Markdown format for easy insertion into 
-[R Markdown documents](http://rmarkdown.rstudio.com/):
+[R Markdown documents](https://rmarkdown.rstudio.com/):
 
 ```{r}
 build_table(tab)
@@ -168,11 +168,11 @@ iris %>%
 # Resources:
 
 - Tidy data:
-    - [Hadley Wickham's tidy data article](http://vita.had.co.nz/papers/tidy-data.pdf)
-    - [CrossValidated Q&A list of 'best practices'](http://stats.stackexchange.com/questions/83614/best-practices-for-creating-tidy-data)
-    - [Garrett Grolemund's (member of RStudio) blog post](http://garrettgman.github.io/tidying/)
+    - [Hadley Wickham's tidy data article](https://vita.had.co.nz/papers/tidy-data.pdf)
+    - [CrossValidated Q&A list of 'best practices'](https://stats.stackexchange.com/questions/83614/best-practices-for-creating-tidy-data)
+    - [Garrett Grolemund's (member of RStudio) blog post](https://garrettgman.github.io/tidying/)
 - Other table customizing packages (but not builders):
-    - [`pander`](http://rapporter.github.io/pander/)
+    - [`pander`](https://rapporter.github.io/pander/)
     - [`pixiedust`](https://cran.r-project.org/package=pixiedust)
     - [`stargazer`](https://cran.r-project.org/package=stargazer)
     - [`htmlTable`](https://cran.r-project.org/package=htmlTable)
