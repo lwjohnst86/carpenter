@@ -23,7 +23,7 @@ test_that("build_table outputs correct information", {
     draft <- renaming(draft, 'header', c('Rows', 'Group1', 'Group2'))
     output_table <- build_table(draft, finish = FALSE)
 
-    expected_table <- dplyr::data_frame(
+    expected_table <- tibble::tibble(
         Rows = c('V1', 'V2', 'V3', '- no', '- yes', "V4", "- yes", "- no", "- def", "- huh"),
         Group1 = c('2.0 (0.0)', '1.5 (1.0-2.0)', NA, '2 (50%)', '2 (50%)', NA, NA, NA, "2 (50%)", "2 (50%)"),
         Group2 = c('1.0 (0.0)', '1.5 (1.0-2.0)', NA, '2 (50%)', '2 (50%)', NA, "2 (50%)", "2 (50%)", NA, NA)
@@ -33,7 +33,7 @@ test_that("build_table outputs correct information", {
 })
 
 test_that("build_table outputs in order as determined in data", {
-    ds <- dplyr::data_frame(
+    ds <- tibble::tibble(
         Group = as.factor(mtcars$vs),
         Z = factor(
             rep(c(0, 1), 16),
@@ -48,7 +48,7 @@ test_that("build_table outputs in order as determined in data", {
     draft <- add_rows(draft, 'A', stat_nPct)
     output_table <- build_table(draft, finish = FALSE)
 
-    expected_table <- dplyr::data_frame(
+    expected_table <- tibble::tibble(
         Variables = c('Z', "- yes", "- no", "A", '- 5', '- 4', '- 3'),
         `0` = c(NA, '7 (38.9%)', '11 (61.1%)', NA, "4 (22.2%)", "2 (11.1%)", "12 (66.7%)"),
         `1` = c(NA, "9 (64.3%)", "5 (35.7%)", NA, "1 (7.1%)", "10 (71.4%)", "3 (21.4%)")
