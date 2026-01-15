@@ -1,30 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>http://carpenter.lukewjohnston.com/index.html</loc>
-  </url>
-  <url>
-    <loc>http://carpenter.lukewjohnston.com/reference/add_rows.html</loc>
-  </url>
-  <url>
-    <loc>http://carpenter.lukewjohnston.com/reference/build_table.html</loc>
-  </url>
-  <url>
-    <loc>http://carpenter.lukewjohnston.com/reference/carpenter.html</loc>
-  </url>
-  <url>
-    <loc>http://carpenter.lukewjohnston.com/reference/outline_table.html</loc>
-  </url>
-  <url>
-    <loc>http://carpenter.lukewjohnston.com/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>http://carpenter.lukewjohnston.com/reference/renaming.html</loc>
-  </url>
-  <url>
-    <loc>http://carpenter.lukewjohnston.com/reference/table_stats.html</loc>
-  </url>
-  <url>
-    <loc>http://carpenter.lukewjohnston.com/articles/carpenter.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>http://lwjohnst86.github.io/carpenter/404.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/LICENSE-text.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/LICENSE.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/articles/carpenter.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/articles/index.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/authors.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/index.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/news/index.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/reference/add_rows.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/reference/build_table.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/reference/carpenter.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/reference/index.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/reference/outline_table.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/reference/pipe.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/reference/renaming.html</loc></url>
+<url><loc>http://lwjohnst86.github.io/carpenter/reference/table_stats.html</loc></url>
 </urlset>
+

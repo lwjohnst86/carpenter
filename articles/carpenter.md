@@ -1,0 +1,246 @@
+# Introduction to carpenter
+
+> Note: At present, carpenter only creates tables that you would
+> typically see as the ‘basic characteristics’ or ‘descriptive
+> statistics’ table in most biomedical articles. The plan is to include
+> other common table structures, but they haven’t been implemented yet.
+> If you have any suggestions, let me know as an
+> [Issue](https://github.com/lwjohnst86/carpenter/issues/new)!
+
+In biomedical research, there are certain types of tables that are often
+included in the article. For instance, some basic statistics between the
+treatment and control group. Or maybe it is between males and females,
+before and after an intervention, and so on. Often these tables are a
+hassle to create and are prone to needing updates based on slight
+changes in the data or from reviewer comments. carpenter was designed to
+make creating these tables easily and for them to be easily updated when
+data changes.
+
+### Minor caveat/consideration
+
+Before going over the code, I should mention a key note and assumption:
+how the table is eventually presented is determined by how the data
+looks when it is passed into the carpenter functions. A good example is
+‘before and after’ studies, where researchers may store data where each
+row is the participant and the remaining columns being the before and
+after values of a measure (e.g. `Weight_before` and `Weight_after` as
+two columns). In this case, the data should *ideally* be formatted more
+like this:
+
+| ID  | Visit  | Weight |
+|-----|--------|--------|
+| 1   | Before | 50     |
+| 1   | After  | 54     |
+| 2   | Before | 65     |
+| 2   | After  | 70     |
+
+See how the data is stored in ‘long’ format. This is the form of data
+that carpenter was designed to deal with. For more details on what is
+tidy data see resources at the end.
+
+### Code usage
+
+The underlying design principal for carpenter is that you create an
+outline of what the table should look like before finally creating the
+table. This is how carpenters also work: they sketch what the product
+will look like before actually starting to build anything. There are
+four ‘outlining’ functions, several carpenter statistics functions, and
+one final ‘building’ function:
+
+- [`outline_table()`](http://lwjohnst86.github.io/carpenter/reference/outline_table.md)
+  starts the outlining process.
+- [`add_rows()`](http://lwjohnst86.github.io/carpenter/reference/add_rows.md)
+  adds variables to the row or rows with associated descriptive
+  statistics.
+- `stat_*()` type statistic functions to be used with
+  [`add_rows()`](http://lwjohnst86.github.io/carpenter/reference/add_rows.md)
+  (a list of available statistics can be found using
+  [`?carpenter::table_stats`](http://lwjohnst86.github.io/carpenter/reference/table_stats.md)).
+- [`renaming()`](http://lwjohnst86.github.io/carpenter/reference/renaming.md)
+  for customizing the naming of the rows and table headers.
+- `build-table()` for finally building the table (uses the
+  [`pander`](http://rapporter.github.io/pander/) package).
+
+These functions are chained together using the wonderful
+[magrittr](https://cran.r-project.org/package=magrittr) `%>%` pipe. If
+you’ve never used this package or the pipe, take a look at the vignette
+on introducing it. So, let’s do some coding:
+
+``` r
+library(magrittr)
+library(carpenter)
+head(iris)
+```
+
+    #>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+    #> 1          5.1         3.5          1.4         0.2  setosa
+    #> 2          4.9         3.0          1.4         0.2  setosa
+    #> 3          4.7         3.2          1.3         0.2  setosa
+    #> 4          4.6         3.1          1.5         0.2  setosa
+    #> 5          5.0         3.6          1.4         0.2  setosa
+    #> 6          5.4         3.9          1.7         0.4  setosa
+
+``` r
+outline_table(iris, 'Species') 
+```
+
+    #> # A tibble: 0 × 0
+
+You’ll notice that the `outline_table` function returned a `tibble` of 0
+rows and 0 columns. That’s because we haven’t added anything else to the
+table! carpenter is waiting for more information. So we add rows by:
+
+``` r
+outline_table(iris, 'Species') %>% 
+    add_rows('Sepal.Length', stat_meanSD) 
+```
+
+    #> # A tibble: 1 × 4
+    #>   Variables    setosa    versicolor virginica
+    #>   <chr>        <chr>     <chr>      <chr>    
+    #> 1 Sepal.Length 5.0 (0.4) 5.9 (0.5)  6.6 (0.6)
+
+You see it has now added a row to the table. Adding more rows:
+
+``` r
+outline_table(iris, 'Species') %>% 
+    add_rows(c('Sepal.Length', 'Petal.Length'), stat_meanSD) %>%
+    add_rows('Sepal.Width', stat_medianIQR) 
+```
+
+    #> # A tibble: 3 × 4
+    #>   Variables    setosa        versicolor    virginica    
+    #>   <chr>        <chr>         <chr>         <chr>        
+    #> 1 Sepal.Length 5.0 (0.4)     5.9 (0.5)     6.6 (0.6)    
+    #> 2 Petal.Length 1.5 (0.2)     4.3 (0.5)     5.6 (0.6)    
+    #> 3 Sepal.Width  3.4 (3.2-3.7) 2.8 (2.5-3.0) 3.0 (2.8-3.2)
+
+See how this can make creating these tables very easy. Let’s remove the
+`.` from the row names and fix up the table header names:
+
+``` r
+tab <- outline_table(iris, 'Species') %>% 
+    add_rows(c('Sepal.Length', 'Petal.Length'), stat_meanSD) %>%
+    add_rows('Sepal.Width', stat_medianIQR)  %>% 
+    renaming('header', c('Measures', 'Setosa', 'Versicolor', 'Virginica')) %>% 
+    renaming('rows', function(x) gsub('\\.', ' ', x))
+tab
+```
+
+    #> # A tibble: 3 × 4
+    #>   Measures     Setosa        Versicolor    Virginica    
+    #>   <chr>        <chr>         <chr>         <chr>        
+    #> 1 Sepal Length 5.0 (0.4)     5.9 (0.5)     6.6 (0.6)    
+    #> 2 Petal Length 1.5 (0.2)     4.3 (0.5)     5.6 (0.6)    
+    #> 3 Sepal Width  3.4 (3.2-3.7) 2.8 (2.5-3.0) 3.0 (2.8-3.2)
+
+And finally build the table into a Markdown format for easy insertion
+into [R Markdown documents](https://rmarkdown.rstudio.com/):
+
+``` r
+build_table(tab)
+```
+
+| Measures     |    Setosa     |  Versicolor   |   Virginica   |
+|:-------------|:-------------:|:-------------:|:-------------:|
+| Sepal Length |   5.0 (0.4)   |   5.9 (0.5)   |   6.6 (0.6)   |
+| Petal Length |   1.5 (0.2)   |   4.3 (0.5)   |   5.6 (0.6)   |
+| Sepal Width  | 3.4 (3.2-3.7) | 2.8 (2.5-3.0) | 3.0 (2.8-3.2) |
+
+If you have factor/discrete data, you can even use include these
+variables:
+
+``` r
+library(dplyr, quietly = TRUE)
+```
+
+    #> 
+    #> Attaching package: 'dplyr'
+
+    #> The following objects are masked from 'package:stats':
+    #> 
+    #>     filter, lag
+
+    #> The following objects are masked from 'package:base':
+    #> 
+    #>     intersect, setdiff, setequal, union
+
+``` r
+mtcars %>% 
+    mutate(
+        gear = as.factor(gear),
+        vs = as.factor(vs)
+    ) %>% 
+    outline_table('vs') %>% 
+    add_rows('mpg', stat_meanSD) %>%
+    add_rows('drat', stat_medianIQR) %>% 
+    add_rows('gear', stat_nPct) %>% 
+    renaming('header', c('Measures', 'V-engine', 'Straight engine')) %>% 
+    renaming('rows', function(x) x %>% 
+                 gsub('drat', 'Read axle ratio', .) %>% 
+                 gsub('mpg', 'Miles/gallon', .) %>% 
+                 gsub('gear', 'Number of gears', .)) %>% 
+    build_table()
+```
+
+| Measures        |   V-engine    | Straight engine |
+|:----------------|:-------------:|:---------------:|
+| Miles/gallon    |  16.6 (3.9)   |   24.6 (5.4)    |
+| Read axle ratio | 3.2 (3.1-3.7) |  3.9 (3.7-4.1)  |
+| Number of gears |               |                 |
+| \- 3            |  12 (66.7%)   |    3 (21.4%)    |
+| \- 4            |   2 (11.1%)   |   10 (71.4%)    |
+| \- 5            |   4 (22.2%)   |    1 (7.1%)     |
+
+Pretty easy eh?
+
+Sometimes, though, you don’t need to compare multiple columns, but
+instead need to only show one column. Easy, just don’t include a header
+in the
+[`outline_table()`](http://lwjohnst86.github.io/carpenter/reference/outline_table.md)!
+
+``` r
+iris %>% 
+    outline_table() %>% 
+    add_rows('Sepal.Length', stat_meanSD) %>%
+    add_rows('Sepal.Width', stat_medianIQR) %>% 
+    renaming('header', c('Measures', 'Values')) %>% 
+    build_table() 
+```
+
+| Measures     |    Values     |
+|:-------------|:-------------:|
+| Sepal.Length |   5.8 (0.8)   |
+| Sepal.Width  | 3.0 (2.8-3.3) |
+
+If you don’t use R Markdown, you can continue the chain into
+[`write.csv()`](https://rdrr.io/r/utils/write.table.html). Use the
+`finish = FALSE` argument to
+[`build_table()`](http://lwjohnst86.github.io/carpenter/reference/build_table.md)
+to prevent the Markdown table from being created.!
+
+``` r
+iris %>% 
+    outline_table() %>% 
+    add_rows('Sepal.Length', stat_meanSD) %>%
+    add_rows('Sepal.Width', stat_medianIQR) %>% 
+    renaming('header', c('Measures', 'Values')) %>% 
+    build_table(finish = FALSE) %>% 
+    write.csv('table1.csv', row.names = FALSE)
+```
+
+## Resources:
+
+- Tidy data:
+  - [Hadley Wickham’s tidy data
+    article](https://vita.had.co.nz/papers/tidy-data.pdf)
+  - [CrossValidated Q&A list of ‘best
+    practices’](https://stats.stackexchange.com/questions/83614/best-practices-for-creating-tidy-data)
+  - [Garrett Grolemund’s (member of RStudio) blog
+    post](https://garrettgman.github.io/tidying/)
+- Other table customizing packages (but not builders):
+  - [`pander`](https://rapporter.github.io/pander/)
+  - [`pixiedust`](https://cran.r-project.org/package=pixiedust)
+  - [`stargazer`](https://cran.r-project.org/package=stargazer)
+  - [`htmlTable`](https://cran.r-project.org/package=htmlTable)
+  - [`tableone`](https://cran.r-project.org/package=tableone)
