@@ -9,10 +9,10 @@ output: github_document
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/lwjohnst86/carpenter/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lwjohnst86/carpenter/actions/workflows/R-CMD-check.yaml)
-[![CRAN Status
-Badge](http://www.r-pkg.org/badges/version/carpenter)](https://cran.r-project.org/package=carpenter)
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Downloads](https://cranlogs.r-pkg.org/badges/carpenter)](https://www.r-pkg.org/pkg/carpenter)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/carpenter)](https://CRAN.R-project.org/package=carpenter)
 
 <!-- badges: end -->
 
@@ -42,8 +42,8 @@ install.packages('carpenter')
 For the developmental version, install from GitHub:
 
 ```{r, eval=FALSE}
-# install.packages("remotes")
-remotes::install_github('lwjohnst86/carpenter')
+# install.packages("pak")
+pak::pak('lwjohnst86/carpenter')
 ```
 
 # Example usage
@@ -73,8 +73,9 @@ into the form of a table (in the context of descriptive/basic
 characteristic tables often seen in biomedical research). Even still,
 they are very useful to look over and learn about!
 
--   [`pander`](http://rapporter.github.io/pander/)
+-   [`pander`](https://rapporter.github.io/pander/)
 -   [`pixiedust`](https://cran.r-project.org/package=pixiedust)
 -   [`stargazer`](https://cran.r-project.org/package=stargazer)
 -   [`htmlTable`](https://cran.r-project.org/package=htmlTable)
 -   [`tableone`](https://cran.r-project.org/package=tableone)
+

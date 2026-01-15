@@ -6,10 +6,10 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/lwjohnst86/carpenter/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lwjohnst86/carpenter/actions/workflows/R-CMD-check.yaml)
-[![CRAN Status
-Badge](http://www.r-pkg.org/badges/version/carpenter)](https://cran.r-project.org/package=carpenter)
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Downloads](https://cranlogs.r-pkg.org/badges/carpenter)](https://www.r-pkg.org/pkg/carpenter)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/carpenter)](https://CRAN.R-project.org/package=carpenter)
 
 <!-- badges: end -->
 
@@ -31,8 +31,8 @@ install.packages('carpenter')
 For the developmental version, install from GitHub:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github('lwjohnst86/carpenter')
+# install.packages("pak")
+pak::pak('lwjohnst86/carpenter')
 ```
 
 # Example usage
@@ -49,7 +49,7 @@ outline_table(iris, 'Species') %>%
 ```
 
 | Variables    |    setosa     |  versicolor   |   virginica   |
-| :----------- | :-----------: | :-----------: | :-----------: |
+|:-------------|:-------------:|:-------------:|:-------------:|
 | Sepal.Length |   5.0 (0.4)   |   5.9 (0.5)   |   6.6 (0.6)   |
 | Petal.Length |   1.5 (0.2)   |   4.3 (0.5)   |   5.6 (0.6)   |
 | Sepal.Width  | 3.4 (3.2-3.7) | 2.8 (2.5-3.0) | 3.0 (2.8-3.2) |
@@ -66,10 +66,10 @@ instance markdown or html, but assume the data is in the form you
 already want to present it in. So they don’t help with getting the data
 into the form of a table (in the context of descriptive/basic
 characteristic tables often seen in biomedical research). Even still,
-they are very useful to look over and learn about\!
+they are very useful to look over and learn about!
 
-  - [`pander`](http://rapporter.github.io/pander/)
-  - [`pixiedust`](https://cran.r-project.org/package=pixiedust)
-  - [`stargazer`](https://cran.r-project.org/package=stargazer)
-  - [`htmlTable`](https://cran.r-project.org/package=htmlTable)
-  - [`tableone`](https://cran.r-project.org/package=tableone)
+- [`pander`](https://rapporter.github.io/pander/)
+- [`pixiedust`](https://cran.r-project.org/package=pixiedust)
+- [`stargazer`](https://cran.r-project.org/package=stargazer)
+- [`htmlTable`](https://cran.r-project.org/package=htmlTable)
+- [`tableone`](https://cran.r-project.org/package=tableone)
