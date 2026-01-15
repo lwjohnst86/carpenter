@@ -21,8 +21,7 @@ RoxygenNote: 7.3.3
 Suggests: 
     knitr,
     rmarkdown,
-    testthat,
-    covr
+    testthat
 VignetteBuilder: knitr
 URL: https://github.com/lwjohnst86/carpenter, http://lwjohnst86.github.io/carpenter/
 BugReports: https://github.com/lwjohnst86/carpenter/issues
