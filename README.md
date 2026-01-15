@@ -20,7 +20,7 @@ e.g. relying on using pipes to chain functions together or having
 multiple, dedicated functions to use (rather than a monolithic one with
 lots of arguments).
 
-# Installation
+## Installation
 
 This package is on CRAN, so install using:
 
@@ -35,7 +35,7 @@ For the developmental version, install from GitHub:
 pak::pak('lwjohnst86/carpenter')
 ```
 
-# Example usage
+## Example usage
 
 Here is an example workflow for making tables:
 
@@ -58,7 +58,7 @@ For a more detailed view of how to use carpenter, see `?carpenter` or
 `vignette('carpenter')`. Or view the vignette directly
 [here](https://htmlpreview.github.io/?https://github.com/lwjohnst86/carpenter/blob/master/vignettes/carpenter.html)
 
-# Resources
+## Resources
 
 There are several packages out there that help with making tables. Most
 of them work to output and customize the tables into a given format, for
@@ -73,3 +73,9 @@ they are very useful to look over and learn about!
 - [`stargazer`](https://cran.r-project.org/package=stargazer)
 - [`htmlTable`](https://cran.r-project.org/package=htmlTable)
 - [`tableone`](https://cran.r-project.org/package=tableone)
+
+## Acknowledgements
+
+[Zhila
+Semnani](https://www.linkedin.com/in/zhila-semnani-azad-phd-40507150/)
+made the (I think) cool logo! :D
