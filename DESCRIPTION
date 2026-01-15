@@ -8,7 +8,6 @@ Description: Mainly used to build tables that are commonly presented for
     bio-medical/health research, such as basic characteristic tables or
     descriptive statistics.
 License: MIT + file LICENSE
-LazyData: TRUE
 Imports:
     dplyr,
     magrittr,
