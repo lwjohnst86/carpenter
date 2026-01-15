@@ -4,8 +4,15 @@
 \alias{build_table}
 \title{Build the final table.}
 \usage{
-build_table(data, caption = NULL, style = "rmarkdown", split = Inf,
-  missing = "", alignment = "center", finish = TRUE)
+build_table(
+  data,
+  caption = NULL,
+  style = "rmarkdown",
+  split = Inf,
+  missing = "",
+  alignment = "center",
+  finish = TRUE
+)
 }
 \arguments{
 \item{data}{The draft table object.}
