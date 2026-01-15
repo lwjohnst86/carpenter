@@ -11,3 +11,6 @@
 ^docs$
 ^_pkgdown\.yml$
 ^\.github$
+^air\.toml$
+^justfile$
+^pkgdown$
