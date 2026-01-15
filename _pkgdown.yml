@@ -1,1 +1,4 @@
-url: http://carpenter.lukewjohnston.com
+url: http://lwjohnst86.github.io/carpenter/
+template:
+  bootstrap: 5
+
