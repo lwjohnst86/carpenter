@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/lwjohnst86/carpenter/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/lwjohnst86/carpenter/blob/v0.2.3/DESCRIPTION)
 
 Johnston L (2026). *carpenter: Build Common Tables of Summary Statistics
 for Reports*. R package version 0.2.3,

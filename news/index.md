@@ -2,6 +2,8 @@
 
 ## carpenter 0.2.3
 
+CRAN release: 2026-01-15
+
 ### Fixes
 
 - Replaced deprecated dplyr functions with their modern equivalents.
