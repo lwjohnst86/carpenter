@@ -1,18 +1,17 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# carpenter: Making Tables <img src="man/figures/logo.png" align="right" height=140/>
+# carpenter: Making Tables <img src="man/figures/logo.png" align="right" height="140/"/>
 
-[![Travis-CI Build
-Status](https://travis-ci.org/lwjohnst86/carpenter.svg?branch=master)](https://travis-ci.org/lwjohnst86/carpenter)
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/lwjohnst86/carpenter/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lwjohnst86/carpenter/actions/workflows/R-CMD-check.yaml)
 [![CRAN Status
 Badge](http://www.r-pkg.org/badges/version/carpenter)](https://cran.r-project.org/package=carpenter)
-[![Coverage
-status](https://codecov.io/gh/lwjohnst86/carpenter/branch/master/graph/badge.svg)](https://codecov.io/github/lwjohnst86/carpenter?branch=master)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/lwjohnst86/carpenter?branch=master&svg=true)](https://ci.appveyor.com/project/lwjohnst86/carpenter)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Downloads](https://cranlogs.r-pkg.org/badges/carpenter)](https://www.r-pkg.org/pkg/carpenter)
+
+<!-- badges: end -->
 
 The main goal of carpenter to simplify making those pesky
 descriptive/basic characteristic tables often used in biomedical journal
