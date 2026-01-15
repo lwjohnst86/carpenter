@@ -1,5 +1,12 @@
 # Changelog
 
+## carpenter 0.2.3
+
+### Fixes
+
+- Replaced deprecated dplyr functions with their modern equivalents.
+- Fix CRAN note about `LazyData`.
+
 ## carpenter 0.2.2
 
 CRAN release: 2019-02-05
