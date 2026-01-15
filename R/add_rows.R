@@ -16,38 +16,48 @@
 #' @export
 #'
 add_rows <- function(data, row_vars, stat, digits = 1) {
-    is_draft(data)
+  is_draft(data)
 
-    if (missing(row_vars))
-        stop('Please indicate which variables to use as the rows.')
-    vars_exist(data, row_vars)
+  if (missing(row_vars)) {
+    stop('Please indicate which variables to use as the rows.')
+  }
+  vars_exist(data, row_vars)
 
-    if (missing(stat))
-        stat <- stat_mean
-    if (!is.function(stat))
-        stop('Please use a function for the `stat` arg.', call. = FALSE)
+  if (missing(stat)) {
+    stat <- stat_mean
+  }
+  if (!is.function(stat)) {
+    stop('Please use a function for the `stat` arg.', call. = FALSE)
+  }
 
-    stat <- deparse(substitute(stat))
-    type <- vars_type(data, row_vars)
-    rows <- list()
+  stat <- deparse(substitute(stat))
+  type <- vars_type(data, row_vars)
+  rows <- list()
 
-    current_stats <- attr(data, 'outline')$rows
-    if (!is.null(current_stats)) {
-        if (stat %in% names(current_stats)) {
-            if (type != current_stats[[stat]]$type)
-                stop('Should this statistic `', stat, '` be used with this ',
-                     type, ' data type?', call. = FALSE)
-            row_vars <- c(current_stats[[stat]]$vars, row_vars)
-        }
+  current_stats <- attr(data, 'outline')$rows
+  if (!is.null(current_stats)) {
+    if (stat %in% names(current_stats)) {
+      if (type != current_stats[[stat]]$type) {
+        stop(
+          'Should this statistic `',
+          stat,
+          '` be used with this ',
+          type,
+          ' data type?',
+          call. = FALSE
+        )
+      }
+      row_vars <- c(current_stats[[stat]]$vars, row_vars)
     }
+  }
 
-    rows[stat] <- list(list(
-        vars = row_vars,
-        stat = stat,
-        digits = digits,
-        type = type
-    ))
+  rows[stat] <- list(list(
+    vars = row_vars,
+    stat = stat,
+    digits = digits,
+    type = type
+  ))
 
-    data <- outline(data = data, rows = rows)
-    return(data)
+  data <- outline(data = data, rows = rows)
+  return(data)
 }

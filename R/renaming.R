@@ -14,20 +14,29 @@
 #'   accessing the introduction tutorial vignette.
 #'
 renaming <- function(data, type = c('rows', 'header'), replace) {
-    is_draft(data)
-    type <- match.arg(type)
-    switch(type,
-           rows = {
-               if (!is.function(replace))
-                   stop('Please use a function for renaming the row variables.', call. = FALSE)
-               data <- outline(data = data, rename_rows = replace)
-           },
-           header = {
-               if (!is.character(replace) & !is.function(replace))
-                   stop('Please use a character string of the replacement ',
-                        'headers or a search and replace function (e.g. gsub) for renaming.',
-                        call. = FALSE)
-               data <- outline(data = data, rename_header = replace)
-           })
-    return(data)
+  is_draft(data)
+  type <- match.arg(type)
+  switch(
+    type,
+    rows = {
+      if (!is.function(replace)) {
+        stop(
+          'Please use a function for renaming the row variables.',
+          call. = FALSE
+        )
+      }
+      data <- outline(data = data, rename_rows = replace)
+    },
+    header = {
+      if (!is.character(replace) & !is.function(replace)) {
+        stop(
+          'Please use a character string of the replacement ',
+          'headers or a search and replace function (e.g. gsub) for renaming.',
+          call. = FALSE
+        )
+      }
+      data <- outline(data = data, rename_header = replace)
+    }
+  )
+  return(data)
 }

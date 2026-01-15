@@ -10,24 +10,26 @@
 #'   accessing the introduction tutorial vignette.
 #'
 outline_table <- function(data, header = NULL) {
-    is_df(data)
-    if (is.null(header)) {
-        data <- data %>%
-            dplyr::mutate(.Use_All = factor('all'))
-        header <- '.Use_All'
-    }
-    is_factor(data, header)
-    outline(data = data, header = header)
+  is_df(data)
+  if (is.null(header)) {
+    data <- data %>%
+      dplyr::mutate(.Use_All = factor('all'))
+    header <- '.Use_All'
+  }
+  is_factor(data, header)
+  outline(data = data, header = header)
 }
 
 outline <- function(data, ...) {
-    sketch <- list(...)
-    if (!is.null(attr(data, 'outline')))
-        sketch <- utils::modifyList(attr(data, 'outline'), sketch)
+  sketch <- list(...)
+  if (!is.null(attr(data, 'outline'))) {
+    sketch <- utils::modifyList(attr(data, 'outline'), sketch)
+  }
 
-    if (!'draft' %in% class(data))
-        class(data) <- c('draft', class(data))
+  if (!'draft' %in% class(data)) {
+    class(data) <- c('draft', class(data))
+  }
 
-    attr(data, 'outline') <- sketch
-    return(data)
+  attr(data, 'outline') <- sketch
+  return(data)
 }
